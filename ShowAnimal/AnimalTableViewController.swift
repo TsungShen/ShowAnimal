@@ -32,7 +32,7 @@ struct Result: Decodable {
 }
 
 class AnimalTableViewController: UITableViewController {
-    let animalArray1 = ["cat","chicken","dog","elephant","fox","goat","kangaroo","monkey","mouse","penguin","rabbit","snail"]
+//    let animalArray1 = ["cat","chicken","dog","elephant","fox","goat","kangaroo","monkey","mouse","penguin","rabbit","snail"]
     var animalArray:Array = [String?]()
     var object:Array = [Animal]()
     
@@ -122,10 +122,12 @@ class AnimalTableViewController: UITableViewController {
             
             return cell
         }else{
-            print("error cell")
-            let cell = UITableViewCell()
-            cell.textLabel?.text = animalArray1[indexPath.row]
             
+            popAlert(withTittle: "Show Error")
+//            print("error cell")
+            let cell = UITableViewCell()
+//            cell.textLabel?.text = animalArray1[indexPath.row]
+
             return cell
         }
         
