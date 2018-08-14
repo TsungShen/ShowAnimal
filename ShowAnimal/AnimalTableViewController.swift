@@ -37,7 +37,7 @@ class AnimalTableViewController: UITableViewController {
     var object:Array = [Animal]()
     
 //    let apiAddress = "https://randomuser.me/api"
-    let apiAddress = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=a3e2b221-75e0-45c1-8f97-75acbd43d613&limit=20"
+    let apiAddress = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=a3e2b221-75e0-45c1-8f97-75acbd43d613&limit=200"
     let urlSession = URLSession(configuration: .default)
     
     
