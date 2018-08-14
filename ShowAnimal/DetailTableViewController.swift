@@ -14,7 +14,9 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var distributionLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+//        distributionLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+//        distributionLabel.numberOfLines = 0
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

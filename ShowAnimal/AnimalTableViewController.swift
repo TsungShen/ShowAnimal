@@ -37,7 +37,7 @@ class AnimalTableViewController: UITableViewController {
     var object:Array = [Animal]()
     
 //    let apiAddress = "https://randomuser.me/api"
-    let apiAddress = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=a3e2b221-75e0-45c1-8f97-75acbd43d613&limit=200"
+    let apiAddress = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=a3e2b221-75e0-45c1-8f97-75acbd43d613&limit=20"
     let urlSession = URLSession(configuration: .default)
     
     
@@ -67,11 +67,11 @@ class AnimalTableViewController: UITableViewController {
                     return
                 }
                 if let loadedData = data{
-                    print(loadedData)
+//                    print(loadedData)
                     do{
                         let okData = try JSONDecoder().decode(JsonData.self, from: loadedData)
                         
-                        for i  in 0...Int(okData.result.limit) - 1 {
+                        for i in 0...Int(okData.result.limit) - 1 {
                             let animalName = okData.result.results[i].A_Name_Ch
                             let animalLocation = okData.result.results[i].A_Location
                             let animalDistribution = okData.result.results[i].A_Distribution
@@ -79,8 +79,8 @@ class AnimalTableViewController: UITableViewController {
                             
                             let aAnimal = Animal(name: animalName, location: animalLocation, distribution: animalDistribution, picture: animalPicture)
                             self.object.append(aAnimal)
-                            print(self.object)
                         }
+                        print(self.object)
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }

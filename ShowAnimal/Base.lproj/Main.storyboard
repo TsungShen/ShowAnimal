@@ -130,7 +130,9 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="UtS-L6-svf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="269"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="LoQ-so-MAT">
                                 <cells>
@@ -161,6 +163,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="zAb-zm-QYv" firstAttribute="centerY" secondItem="1tz-28-CDR" secondAttribute="centerY" id="7wm-jg-IUW"/>
                                                 <constraint firstItem="hpR-gZ-PsS" firstAttribute="centerY" secondItem="1tz-28-CDR" secondAttribute="centerY" id="Frc-xi-iEJ"/>
@@ -168,16 +171,17 @@
                                                 <constraint firstItem="hpR-gZ-PsS" firstAttribute="leading" secondItem="zAb-zm-QYv" secondAttribute="trailing" id="uO3-Yw-hHW"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="YVp-q8-IAR">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="YVp-q8-IAR">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YVp-q8-IAR" id="3Ey-Je-5Fs">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="原生棲地：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfj-lO-3SN">
-                                                    <rect key="frame" x="15" y="12" width="87" height="21"/>
+                                                    <rect key="frame" x="15" y="24.5" width="87" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="87" id="8Nw-L0-nty"/>
                                                         <constraint firstAttribute="height" constant="21" id="pqW-lh-jTi"/>
@@ -186,24 +190,28 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="四川" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4d-X7-vY2">
-                                                    <rect key="frame" x="102" y="11" width="270" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="270" id="2Rh-bz-h9h"/>
-                                                        <constraint firstAttribute="height" constant="21" id="DDZ-Fp-PUM"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前僅存於中國四川、甘肅和陜西三省境內" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4d-X7-vY2">
+                                                    <rect key="frame" x="102" y="0.0" width="257" height="69.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="Zfj-lO-3SN" firstAttribute="centerY" secondItem="3Ey-Je-5Fs" secondAttribute="centerY" id="KGy-Te-YpF"/>
+                                                <constraint firstAttribute="trailing" secondItem="T4d-X7-vY2" secondAttribute="trailing" constant="16" id="QOz-8O-2Sc"/>
+                                                <constraint firstItem="T4d-X7-vY2" firstAttribute="leading" secondItem="Zfj-lO-3SN" secondAttribute="trailing" id="SyB-zE-Jge"/>
+                                                <constraint firstAttribute="bottom" secondItem="T4d-X7-vY2" secondAttribute="bottom" id="ZBh-B3-8g7"/>
                                                 <constraint firstItem="T4d-X7-vY2" firstAttribute="leading" secondItem="Zfj-lO-3SN" secondAttribute="trailing" id="azY-4L-ume"/>
+                                                <constraint firstItem="T4d-X7-vY2" firstAttribute="top" secondItem="3Ey-Je-5Fs" secondAttribute="top" id="cCi-19-lO2"/>
                                                 <constraint firstItem="Zfj-lO-3SN" firstAttribute="leading" secondItem="3Ey-Je-5Fs" secondAttribute="leading" constant="15" id="dRg-xV-oYV"/>
+                                                <constraint firstItem="T4d-X7-vY2" firstAttribute="centerY" secondItem="3Ey-Je-5Fs" secondAttribute="centerY" id="pRu-nt-wAf"/>
                                                 <constraint firstItem="T4d-X7-vY2" firstAttribute="centerY" secondItem="3Ey-Je-5Fs" secondAttribute="centerY" id="xRJ-l1-DUE"/>
+                                                <constraint firstItem="T4d-X7-vY2" firstAttribute="centerY" secondItem="3Ey-Je-5Fs" secondAttribute="centerY" id="yUa-0r-34N"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

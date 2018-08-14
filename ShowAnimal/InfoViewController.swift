@@ -20,6 +20,8 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        detailTableViewController?.distributionLabel.numberOfLines = 0
+        detailTableViewController?.distributionLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         
         detailTableViewController?.locationlabel.text = locationFromTableView
         detailTableViewController?.distributionLabel.text = distributionFromTableView
