@@ -10,6 +10,7 @@ import UIKit
 
 class AnimalTableViewCell: UITableViewCell {
 
+    //set cell
     @IBOutlet weak var animalLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
