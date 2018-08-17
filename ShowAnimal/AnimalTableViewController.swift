@@ -31,13 +31,19 @@ struct Result: Decodable {
     var A_Pic01_URL: String
 }
 
-class AnimalTableViewController: UITableViewController {
+class AnimalTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
 //    let animalArray1 = ["cat","chicken","dog","elephant","fox","goat","kangaroo","monkey","mouse","penguin","rabbit","snail"]
+    var shouldShowSearchResults = false
     var animalArray:Array = [String?]()
     var object:Array = [Animal]()
+    var searchArray:Array = [String]()
+    
+    //make searchTool
+    var searchController:UISearchController?
+    var searchResults:Array = [Animal]()
     
 //    let apiAddress = "https://randomuser.me/api"
-    let apiAddress = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=a3e2b221-75e0-45c1-8f97-75acbd43d613&limit=20"
+    let apiAddress = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=a3e2b221-75e0-45c1-8f97-75acbd43d613&limit=200"
     let urlSession = URLSession(configuration: .default)
     
     
@@ -46,6 +52,7 @@ class AnimalTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         downloadInfo(withAddress: apiAddress)
+        configureSearchController()
     }
 
     func downloadInfo(withAddress webAddress:String){
@@ -79,8 +86,11 @@ class AnimalTableViewController: UITableViewController {
                             
                             let aAnimal = Animal(name: animalName, location: animalLocation, distribution: animalDistribution, picture: animalPicture)
                             self.object.append(aAnimal)
+//                            self.searchArray.append(animalName)
                         }
+                        print(self.object.count)
                         print(self.object)
+//                        print(self.searchArray)
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
@@ -112,35 +122,41 @@ class AnimalTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return animalArray1.count
-        return object.count
+        if shouldShowSearchResults == false{
+            return object.count
+        }else if shouldShowSearchResults == true{
+            return (searchResults.count)
+        }else{
+            return object.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "animalCell", for: indexPath) as? AnimalTableViewCell {
-//            cell.animalLabel.text = animalArray1[indexPath.row]
-            cell.animalLabel.text = object[indexPath.row].name
-            
-            return cell
-        }else{
-            
-            popAlert(withTittle: "Show Error")
-//            print("error cell")
-            let cell = UITableViewCell()
-//            cell.textLabel?.text = animalArray1[indexPath.row]
-
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "animalCell", for: indexPath) as? AnimalTableViewCell
+        if shouldShowSearchResults == false{
+            cell?.animalLabel.text = object[indexPath.row].name
+        }else if shouldShowSearchResults == true{
+            cell?.animalLabel.text = searchResults[indexPath.row].name
         }
-        
+        return cell!
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showInfo"{
             if let dvc = segue.destination as? InfoViewController{
                 if let selectRow = tableView.indexPathForSelectedRow?.row{
+                    if shouldShowSearchResults == false{
                     dvc.animalNameFromTableView = object[selectRow].name
                     dvc.locationFromTableView = object[selectRow].location
                     dvc.distributionFromTableView = object[selectRow].distribution
                     dvc.pictureFromTableView = object[selectRow].picture
                     dvc.navigationItem.title = object[selectRow].name
+                    }else if shouldShowSearchResults == true{
+                        dvc.animalNameFromTableView = searchResults[selectRow].name
+                        dvc.locationFromTableView = searchResults[selectRow].location
+                        dvc.distributionFromTableView = searchResults[selectRow].distribution
+                        dvc.pictureFromTableView = searchResults[selectRow].picture
+                        dvc.navigationItem.title = searchResults[selectRow].name
+                    }
                 }
             }
         }
@@ -152,9 +168,80 @@ class AnimalTableViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
+//    func filterContent(for searchText: String){
+//        searchResults = searchArray.filter({
+//            (searchResult) -> Bool in
+////             let name = searchResult.localizedCaseInsensitiveContains(searchText)
+//                let isMatch = searchResult.localizedCaseInsensitiveContains(searchText)
+//                return isMatch
+//
+//        })
+//    }
+    
+    
+    
+    func configureSearchController(){
+        searchController = UISearchController(searchResultsController: nil)
+        searchController?.searchResultsUpdater = self
+        searchController?.searchBar.delegate = self
+        searchController?.searchBar.placeholder = "輸入您想找的動物"
+        searchController?.dimsBackgroundDuringPresentation = false
+        searchController?.searchBar.sizeToFit()
+        
+        tableView.tableHeaderView = searchController?.searchBar
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        shouldShowSearchResults = true
+        tableView.reloadData()
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        shouldShowSearchResults = false
+        tableView.reloadData()
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if !shouldShowSearchResults{
+            shouldShowSearchResults = true
+            tableView.reloadData()
+        }
+        searchController?.searchBar.resignFirstResponder()
+    }
+//    func updateSearchResults(for searchController: UISearchController) {
+//        guard let searchText = searchController.searchBar.text else {
+//            return
+//        }
+//        print("keyWord: \(searchText)")
+//        searchResults = searchArray.filter({
+//            (animal) -> Bool in
+//            let animalText = animal
+//            let isMatch = animalText.localizedCaseInsensitiveContains(searchText)
+//            return isMatch
+//        })
+//
+//    }
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        guard let searchText = searchController.searchBar.text else {
+            return
+            }
+            print("keyWord: \(searchText)")
+            searchResults = object.filter({
+                (animal) -> Bool in
+                let animalText = animal.name
+                let isMatch = animalText.localizedCaseInsensitiveContains(searchText)
+                return isMatch
+            })
+            print(searchResults)
+        }
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showInfo", sender: nil)
     }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
